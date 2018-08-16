@@ -1,0 +1,57 @@
+﻿body {
+    background-image: url("game_background.jpg");
+    background-repeat:no-repeat;
+    background-size:cover;
+    z-index: 1;
+    color: white;
+
+}
+
+h2 {
+    text-align: center;
+
+}
+
+.section {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+    z-index: 100;
+    padding: 20px;
+}
+
+.setBlack {
+    color:black;
+}
+
+.myTitle {
+    font-family: 'Press Start 2P', cursive;
+    text-transform: uppercase;
+    padding:10px;
+}
+
+.addGame {
+    /*position: absolute;
+    left: 9vw;*/
+
+}
+
+.createForm {
+    text-align: center;
+}
+
+.myForm dt {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.myForm dd {
+    font-weight: normal;
+    font-size: 1.5em;
+}
+
+.upvoteText {
+    font-weight: bolder;
+    margin: 0px;
+    padding: 0px;
+    text-align:center;
+}

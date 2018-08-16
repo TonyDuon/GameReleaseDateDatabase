@@ -1,0 +1,83 @@
+﻿@model GamesDatabase_Project.Models.Game
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="section text-center">
+    <h2 class="myTitle">Create</h2>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken();
+        @*@Html.ValidationSummary()*@
+        @Html.ValidationMessageFor(g => g.Title, "", new { @class = "text-danger" }) <br />
+        @Html.ValidationMessageFor(g => g.release_date, "", new { @class = " text-danger" })
+        String s = "";
+
+        <div class="form-horizontal">
+
+            <div class="form-group">
+                <h4 class="control-label col-md-5">Game Title</h4>
+                <div class="col-md-7">
+                    @Html.EditorFor(g => g.Title, "Title", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h4 class="control-label col-md-5">Release Date <br />(YYYY-MM-DD)</h4>
+                <div class="col-md-7">
+                    @Html.EditorFor(g => g.release_date, "Release Date", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="form-group">
+                <h4 class="control-label col-md-5">Image URL</h4>
+                <div class="col-md-7">
+                    @Html.EditorFor(g => g.Image, "imgURL", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h4 class="control-label col-md-5">Video URL</h4>
+                <div class="col-md-7">
+                    @Html.EditorFor(g => g.Video, "vidURL", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                <h4 class="control-label col-md-5">Upvotes</h4>
+                <div class="col-md-7">
+                    @Html.EditorFor(g => g.Upvote, "vote", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                <h4 class="control-label col-md-5">Genre(s)</h4>
+                <div class="col-md-7">
+                    @Html.EditorFor(g => s, null, "Genre(s)", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h4 class="control-label col-md-5">Platform(s)</h4>
+                <div class="col-md-7">
+                    @Html.EditorFor(g => s, null, "Platform(s)", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div><br /><br />
+
+        <h5>[Note: use "," to seperate tags in Genre and Platform]</h5>
+        <a href="@Url.Action("index")" class="btn btn-warning">
+            <i class="fas fa-home"></i>
+            Home
+        </a>
+
+        <button class="btn btn-success">
+            <i class="fas fa-plus-square"></i>
+            <span>
+                Add Game
+            </span>
+        </button>
+    }
+
+</div>

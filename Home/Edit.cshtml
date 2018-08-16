@@ -1,0 +1,122 @@
+﻿@model GamesDatabase_Project.Models.Game
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<section class="section">
+    <h2 class="myTitle">Edit</h2>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationMessageFor(g => g.Title, "", new { @class = "text-danger" })
+        @Html.ValidationMessageFor(g => g.release_date, "", new { @class = "text-danger" })
+
+        var lastGenre = Model.gameGenres.LastOrDefault(x => x.gameID == Model.ID);
+        var lastPlatform = Model.gamePlatforms.LastOrDefault(x => x.gameID == Model.ID);
+
+        string genreString = "";
+        foreach (var genreItem in Model.gameGenres)
+        {
+            if (genreItem.gameID == Model.ID)
+            {
+                if (genreItem.genreID == genreItem.genre.ID)
+                {
+                    genreString += genreItem.genre.Genre1 + ", ";
+
+                    if (lastGenre.Equals(genreItem))
+                    {
+                        genreString = genreString.Substring(0, genreString.Length - 2);
+                    }
+                }
+            }
+        }
+
+        string platformString = "";
+        foreach (var platItem in Model.gamePlatforms)
+        {
+            if (platItem.gameID == Model.ID)
+            {
+                if (platItem.platformID == platItem.platform.ID)
+                {
+                    platformString += platItem.platform.Platform1 + ", ";
+
+                    if (lastPlatform.Equals(platItem))
+                    {
+                        platformString = platformString.Substring(0, platformString.Length - 2);
+                    }
+                }
+            }
+        }
+
+        <div class="form-horizontal">
+
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <h4 class="control-label col-md-5">Title</h4>
+                <div class="col-md-7">
+                    @Html.EditorFor(g => g.Title, "Title", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h4 class="control-label col-md-5">Release Date</h4>
+                <div class="col-md-7">
+                    @Html.EditorFor(g => g.release_date, "Release Date", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h4 class="control-label col-md-5">Image URL</h4>
+                <div class="col-md-7">
+                    @Html.EditorFor(g => g.Image, "imgURL", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h4 class="control-label col-md-5">Video URL</h4>
+                <div class="col-md-7">
+                    @Html.EditorFor(g => g.Video, "vidURL", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                <h4 class="control-label col-md-5">Upvotes</h4>
+                <div class="col-md-7">
+                    @Html.EditorFor(g => g.Upvote, "vote", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                <h4 class="control-label col-md-5">Genre(s)</h4>
+                <div class="col-md-7">
+                    @Html.EditorFor(g => genreString, null, "Genre(s)", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h4 class="control-label col-md-5">Platform(s)</h4>
+                <div class="col-md-7">
+                    @Html.EditorFor(g => platformString, null, "Platform(s)", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <br />
+            <div class="form-group text-center">
+                <h5>[Note: use "," to seperate tags in Genre and Platform]</h5>
+                <a href="@Url.Action("index")" class="btn btn-warning">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+                <button class="btn btn-success">
+                    <i class="fas fa-save"></i>
+                    Save
+                </button>
+            </div>
+        </div>
+    }
+
+
+
+</section>
